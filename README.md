@@ -32,6 +32,50 @@ Streamline the process of generating creative briefs by guiding users through st
 | Optional  | Notion, Zapier, Google Docs |
 
 ---
+## 🛠️ Tool Card: `CreativeBriefGenerator`
+
+**Purpose:**  
+Transforms messy creative input into a structured, professional brief — ready for use by content teams, strategists, or other AI agents. Streamlines early-stage project scoping and standardizes creative intake across teams.
+
+---
+
+**Required Inputs:**
+
+| Field              | Description                                                 |
+|-------------------|-------------------------------------------------------------|
+| `project_name`     | Title or label for the project (optional)                   |
+| `audience_description` | Who the content is for and what they care about        |
+| `asset_type`       | Format or deliverable type (e.g., podcast, landing page)    |
+| `idea_dump`        | Raw notes, ideas, goals, or brainstorm text                 |
+| `references`       | Optional links, examples, or inspiration                    |
+| `chaos_level`      | Self-rated input clarity ("napkin sketch" to "pretty clear")|
+| `tone_guidance`    | Desired tone, voice, or stylistic instructions              |
+| `avoid_notes`      | Words, phrases, or directions to avoid                      |
+
+---
+
+**Expected Outputs:**
+
+| Field              | Description                                                 |
+|-------------------|-------------------------------------------------------------|
+| `brief_title`      | A clean, human-readable title                               |
+| `summary`          | A paragraph summarizing the idea                            |
+| `audience_goals`   | Key insights about the target audience                      |
+| `tone_style_tags`  | A few descriptive tags for tone and voice                   |
+| `platforms`        | Suggested content channels (if inferable)                   |
+| `GPT_prompt`       | Reusable prompt for future generation                       |
+| `raw_markdown`     | Optional Markdown version of the brief                      |
+
+---
+
+**Business Value:**
+
+- Saves 1–2 hours per creative request by automating the brief creation process  
+- Reduces misalignment between stakeholders and creative teams  
+- Ensures consistency in tone, goals, and brand across content  
+- Enables async collaboration with clear, structured briefs  
+
+---
 
 ## 🧠 Memory + Context Awareness
 
