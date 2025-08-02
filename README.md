@@ -1,10 +1,11 @@
 # 🤖 Vibe Agent 03: BriefBot
 
-**Project Type:** Creative Brief Generator (n8n Form + GPT-powered Prompting)
+<p align="left">
+  <img src="/screenshots/BriefBot-Persona.png" alt="BriefBot Persona" width="250" style="float: left; margin-right: 20px;" />
+</p>
 
+**Project Type:** Creative Brief Generator (n8n Form + GPT-powered Prompting)  
 **Agent Role:** Chaos-wrangling strategist who turns messy ideas into structured briefs. Fluent in vibes, allergic to vagueness.
-
-![BriefBot Persona](.screenshots/BriefBot-Persona.png)
 
 ---
 
