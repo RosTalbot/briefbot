@@ -1,64 +1,73 @@
 # 🤖 Vibe Agent 03: BriefBot
 
-**BriefBot** is an AI-powered assistant that transforms messy creative input into structured, professional briefs — perfect for content creators, marketers, and async teams.
+**Project Type:** Creative Brief Generator (n8n Form + GPT-powered Prompting)
 
-Whether you're planning a podcast, writing a newsletter, or launching a campaign, BriefBot helps clarify your vision in minutes.
+**Agent Role:** Chaos-wrangling strategist who turns messy ideas into structured briefs. Fluent in vibes, allergic to vagueness.
+
+![BriefBot Persona](.screenshots/BriefBot-Persona.png)
 
 ---
 
 ## 🧠 Purpose
 
-Streamline the process of generating creative briefs by guiding users through a few simple questions, then converting the answers into a polished brief — ready for clients, collaborators, or AI agents.
+BriefBot is an AI-powered creative intake agent designed to help content creators, marketers, and brand teams transform messy input into polished briefs. Whether you're launching a podcast, newsletter, or campaign, BriefBot clarifies your vision in minutes.
 
 ---
 
-## 🛠️ How It Works
+## 📌 Project Overview
 
-**Input:**  
-User answers 4–6 short questions:
-- What’s the project or content about?
-- Who’s it for?
-- What’s the desired tone or vibe?
-- What’s the main message or goal?
-
-**Output:**  
-A clean, structured creative brief:
-- Title + Summary
-- Audience & Goals
-- Tone + Style tags
-- Platform + Format
-- Optional GPT-ready prompt for future reuse
+Streamline the process of generating creative briefs by guiding users through structured questions, then converting their responses into clear, actionable briefs — ready for clients, collaborators, or AI reuse.
 
 ---
 
-## 🔌 Tools & Tech
+## 🛠️ Tools & Tech
 
 | Layer     | Tool        |
 |-----------|-------------|
-| LLM       | GPT-4       |
-| Interface | Replit Form or n8n (optional UI) |
+| LLM       | GPT-4o       |
+| Interface | n8n Form (front-end + automation engine) |
 | Output    | Markdown / JSON |
-| Optional  | Zapier, Notion, Docs export |
+| Assets    | Midjourney (persona artwork) |
+| Optional  | Notion, Zapier, Google Docs |
 
 ---
 
-## 🧠 Context Awareness
+## 🧠 Memory + Context Awareness
 
-- Auto-adapts format based on project type (e.g. podcast vs. newsletter)
-- Detects vague input and asks for clarification
-- Uses embedded tone classifiers to recommend matching brand voice prompts
-
----
-
-## 🧠 Memory (Optional Extension)
-
-If using in a multi-session environment (e.g., Notion or a local workspace):
-- BriefBot can recall previously written briefs to ensure consistency
-- Can compare new input to past briefs to highlight shifts in tone or audience
+- Retains tone/style guidelines for each brief
+- Reads and formats context from links, references, or vague input
+- Adapts brief formatting based on idea clarity (dropdown selector from “napkin sketch” to “pretty clear”)
+- Can optionally recall previous briefs (for consistency across campaigns)
 
 ---
 
-## 💡 Example Output
+## 💬 Form: "Lay It On Me"
+
+This is the user entry point. It includes questions like:
+
+- Who’s it for, and what do they care about?
+- What kind of asset are we creating?
+- Drop your brain dump
+- Any tone/style guidelines?
+- Got references or inspiration?
+- How polished is your idea?
+- Anything to avoid?
+
+### Required Fields:
+- Audience
+- Content Type
+- Brain Dump
+- References
+
+### Output:
+- Clean creative brief
+- Optional voice/tone paragraph
+- Brand-safe voice tags
+- GPT-ready reuse prompt
+
+---
+
+## ✅ Example Output
 
 ```markdown
 **Project:** August Podcast Episode – "Systems > Hustle"
@@ -81,25 +90,16 @@ Podcast + IG Reels + Email
 
 ---
 
-## 🚀 Status: MVP v1
-
-- Current version is a prompt-based prototype. 
-- Next step: Replit or Streamlit form for structured inputs
-- Optional: Add JSON/Markdown export button
-
----
-
-## 📸 Recommended Screenshots for Repo
-
-- Input form (Replit or mockup)
-- Raw user input → Polished brief comparison
-- Before/after sample for tone shifts
-- Prompt + Output pairing
+## 📸 Screenshots To Include
+- "Lay It On Me" form UI
+- Form submission confirmation view
+- Backend n8n workflow (form → prompt → output)
+- Before/after: raw input vs formatted brief
+- GitHub repo banner/thumbnail
 
 ---
 
-## 📂 Repo Structure (Suggestion)
-
+## 📂 Suggested Repo Structure
 ```
 briefbot/
 ├── README.md
@@ -114,6 +114,15 @@ briefbot/
 │   └── criteria.md
 └── LICENSE
 ```
+
+---
+
+## 🔁 Future Enhancements
+- Add agent-style voice to response: "Seen worse, give me a sec…"
+- Store outputs in Notion or Airtable
+- Let users choose voice/tone archetypes
+- Add brief refinement step after draft is shown
+- Export as Google Doc or PDF
 
 ---
 
