@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lay It On Me - Creative Brief Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23495057'/><circle cx='50' cy='50' r='35' fill='%23ffffff'/><circle cx='50' cy='50' r='25' fill='%23495057'/></svg>">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f1f3f4 0%, #e3f2fd 50%, #fce4ec 100%);
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            color: #212529;
+        }
+
+        .form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 50%, #4a5568 100%);
+            padding: 3rem 2.5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(139, 69, 19, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 20, 147, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(0, 255, 255, 0.06) 0%, transparent 50%);
+            opacity: 0.8;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+            position: relative;
+            z-index: 1;
+        }
+
+        .briefbot-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2.5rem;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .briefbot-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect x="10" y="10" width="15" height="15" fill="rgba(255,255,0,0.3)" transform="rotate(15)"/><rect x="70" y="20" width="12" height="12" fill="rgba(255,20,147,0.3)" transform="rotate(-10)"/><rect x="20" y="70" width="10" height="10" fill="rgba(0,255,255,0.3)" transform="rotate(25)"/><rect x="80" y="80" width="8" height="8" fill="rgba(50,255,50,0.3)" transform="rotate(-20)"/></svg>') repeat;
+            opacity: 0.6;
+        }
+
+        .briefbot-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .briefbot-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background-image: url('https://raw.githubusercontent.com/RosTalbot/briefbot/08a546e54745ddc51111a9c4372df97c0e995ade/screenshots/BriefBot-Persona.png');
+            background-size: cover;
+            background-position: center;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            animation: float 3s ease-in-out infinite;
+            flex-shrink: 0;
+        }
+
+        /* Fallback if GitHub image doesn't load */
+        .briefbot-avatar::before {
+            content: '🤖';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .briefbot-avatar.fallback::before {
+            opacity: 1;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(2deg); }
+        }
+
+        .briefbot-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: white;
+            margin: 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .briefbot-header .emoji {
+            font-size: 1.2rem;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+
+        .briefbot-description {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            font-weight: 500;
+        }
+
+        .tips-list {
+            list-style: none;
+            margin: 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .tips-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+
+        .tips-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .check-mark {
+            color: #7fffd4;
+            font-weight: bold;
+            margin-top: 2px;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
+        }
+
+        .bottom-note {
+            text-align: center;
+            font-style: italic;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: 1.5rem;
+            font-size: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .form-content {
+            padding: 3rem 2.5rem;
+            background: linear-gradient(to bottom, #ffffff 0%, #fafbfc 100%);
+            position: relative;
+        }
+
+        .form-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: 
+                radial-gradient(circle at center, rgba(255, 20, 147, 0.03) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .field-group {
+            margin-bottom: 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .field-group:last-child {
+            margin-bottom: 0;
+        }
+
+        label {
+            display: block;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .required {
+            color: #e53e3e;
+        }
+
+        input[type="text"], 
+        textarea, 
+        select {
+            width: 100%;
+            padding: 1rem 1.25rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: inherit;
+            background: #ffffff;
+            transition: all 0.3s ease;
+            color: #4a5568;
+        }
+
+        input[type="text"]:focus, 
+        textarea:focus, 
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, #ffffff 0%, #f7fafc 100%);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+            line-height: 1.6;
+        }
+
+        .textarea-large {
+            min-height: 150px;
+        }
+
+        select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="%234a5568" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg>');
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 16px;
+            padding-right: 3rem;
+        }
+
+        .submit-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 1.25rem 3rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+            width: 100%;
+            margin-top: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .submit-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .submit-button:hover::before {
+            left: 100%;
+        }
+
+        .submit-button:active {
+            transform: translateY(-1px);
+        }
+
+        ::placeholder {
+            color: #a0aec0;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem 0.5rem;
+            }
+            
+            .header {
+                padding: 2rem 1.5rem 1.5rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .briefbot-info {
+                padding: 2rem 1.5rem;
+            }
+            
+            .briefbot-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+            }
+            
+            .briefbot-avatar {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .form-content {
+                padding: 2rem 1.5rem;
+            }
+            
+            .field-group {
+                margin-bottom: 2rem;
+            }
+        }
+
+        /* Subtle animation for form load */
+        .form-container {
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <div class="header">
+            <h1>Lay It On Me</h1>
+        </div>
+        
+        <div class="briefbot-info">
+            <div class="briefbot-header">
+                <div class="briefbot-avatar" title="BriefBot - Your Creative Strategist"></div>
+                <div>
+                    <h2><span class="emoji">📝</span> Read Before You Submit</h2>
+                </div>
+            </div>
+            
+            <div class="briefbot-description">
+                BriefBot turns messy ideas into polished briefs — but only if you feed it real info.
+            </div>
+            
+            <ul class="tips-list">
+                <li><span class="check-mark">✓</span> Use a real brand, company, or creator</li>
+                <li><span class="check-mark">✓</span> Drop links or quotes for tone/style matching</li>
+                <li><span class="check-mark">✓</span> Be honest about what's clear vs messy</li>
+                <li><span class="check-mark">✓</span> Say "yes" to web search if you want smarter fill-ins</li>
+            </ul>
+            
+            <div class="bottom-note">
+                The better your input, the better your brief.
+            </div>
+        </div>
+        
+        <div class="form-content">
+            <form>
+                <div class="field-group">
+                    <label for="project-name">What's this thing called?</label>
+                    <input type="text" id="project-name" name="project-name" placeholder="Give your project a name (clever or boring, doesn't matter.)">
+                </div>
+
+                <div class="field-group">
+                    <label for="audience">Who is your audience, and what do they actually care about? <span class="required">*</span></label>
+                    <textarea id="audience" name="audience" placeholder="Be specific. What are they struggling with? What do they want more of? How do they talk?"></textarea>
+                </div>
+
+                <div class="field-group">
+                    <label for="brand-info">What brand, company, or public figure is this for (if any)?</label>
+                    <input type="text" id="brand-info" name="brand-info" placeholder="Name of a company or creator. Helps me search for voice/style references.">
+                </div>
+
+                <div class="field-group">
+                    <label for="content-type">What kind of content, system, or asset are we creating? <span class="required">*</span></label>
+                    <input type="text" id="content-type" name="content-type" placeholder="Landing page? Podcast? IG carousel? Give me the format.">
+                </div>
+
+                <div class="field-group">
+                    <label for="brain-dump">Drop your brain dump here. <span class="required">*</span></label>
+                    <textarea id="brain-dump" name="brain-dump" class="textarea-large" placeholder="Messy notes, goals, talking points — anything in your head goes here."></textarea>
+                </div>
+
+                <div class="field-group">
+                    <label for="references">Got links, inspo, or references? <span class="required">*</span></label>
+                    <textarea id="references" name="references" placeholder="Paste any URLs, past content to match, or describe the vibe."></textarea>
+                </div>
+
+                <div class="field-group">
+                    <label for="web-search">Can I search the web to find more brand info if needed?</label>
+                    <select id="web-search" name="web-search">
+                        <option value="">Select an option...</option>
+                        <option value="yes">Yes, go for it</option>
+                        <option value="no">No, work with what I've given you</option>
+                    </select>
+                </div>
+
+                <div class="field-group">
+                    <label for="idea-polish">How polished is your idea?</label>
+                    <select id="idea-polish" name="idea-polish">
+                        <option value="">Select an option...</option>
+                        <option value="cursed-napkin">Cursed napkin sketch</option>
+                        <option value="medium-messy">Medium-messy brainstorm</option>
+                        <option value="rough-brief">Rough brief, needs cleaning</option>
+                        <option value="pretty-clear">Pretty clear, just needs formatting</option>
+                    </select>
+                </div>
+
+                <div class="field-group">
+                    <label for="tone-style">Any tone/style guidelines?</label>
+                    <textarea id="tone-style" name="tone-style" placeholder="Snarky? Soothing? Buttoned-up? Tell me how it should sound."></textarea>
+                </div>
+
+                <div class="field-group">
+                    <label for="avoid">Any words, phrases, or directions to avoid?</label>
+                    <textarea id="avoid" name="avoid" placeholder="Anything that makes you cringe? Drop it here so I can steer clear."></textarea>
+                </div>
+
+                <button type="submit" class="submit-button">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
